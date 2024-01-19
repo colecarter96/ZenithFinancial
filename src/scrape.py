@@ -1,6 +1,20 @@
 
 import requests 
 from bs4 import BeautifulSoup 
+
+class Trade:
+    def __init__(self, ticker, tipo, days):
+        self.ticker = ticker
+        self.tipo = tipo
+        self.days = days
+
+    def getTicker(self):
+         return self.ticker
+    def getType(self):
+        return self.tipo
+    def getDays(self):
+        return self.days
+
   
 # Making a GET request 
 r = requests.get('https://www.capitoltrades.com/trades') 
@@ -22,60 +36,43 @@ s1 = s.find('div', class_='container')
 yep = s1.find('tbody')
 trade = yep.find('tr', class_='q-tr')
 
+# while trade != None: --this works just testing something
+#     print(trade)
+#     print(" ")
+#     trade = trade.find_next('tr', class_='q-tr')
+
+
+    
+txList = []
 while trade != None:
-    print(trade)
-    print(" ")
+    ticType = trade.find('span', class_='q-field issuer-ticker')
+    # print(ticType.get_text())
+
+    txType = trade.find('td', class_='q-td q-column--txType').find('div', class_='q-cell cell--tx-type')
+    # print(" ")
+    if txType.find('span', class_="q-field tx-type tx-type--buy") != None:
+        tipo = 'Buy'
+    elif txType.find('span', class_="q-field tx-type tx-type--sell") != None:
+        tipo = 'Sell'
+
+    # print(' ')
+    txDays = trade.find('span', class_='reporting-gap-tier--2')
+    # print(txDays.get_text())
+    # trades[counter] = trade.find('td', class_='q-td q-column--txType').find('div', class_='q-cell cell--tx-type')
+    # print(" ")
+    # print(' ')
+
+    t1 = Trade(ticType.get_text(), tipo, txDays.get_text())
+
+    txList.append(t1)
+
     trade = trade.find_next('tr', class_='q-tr')
-
-
-# important bit
-# firstT = yep.find('tr', class_='q-tr')
-# print(firstT)
-# print(' ')
-# nextT = firstT.find_next('tr', class_='q-tr')
-# print(nextT)
-
-
-# line = s1.find('tr', class_="q-tr")
-# line = line.find_next('tr', class_='q-tr')
-# print(line)
-# print(' ')
-# then = s1.find_next('tr', )
-
-
-#line = line.find_all_next('tr', class_='q-tr')
-# next = line.find('td', class_='q-td q-column--issuer')
-# then = next.find('div', class_='q-cell cell--traded-issuer has-avatar')
-# after = then.find('div')
-# henceforth = after.find('div', class_='q-fieldset issuer-info')
-# terminally = henceforth.find('span', class_='q-field issuer-ticker')
-
-# type = s1.find('')
-# line = s1.find('span', class_='q-field issuer-ticker')
-# buy = line.find('th', class_='q-th q-column--issuer')
-lol = s1.find_next
-# next = buy.find('div', class_='q-cell cell--traded-issuer has-avatar')
-#print(line)
-# print(" ")
-# print(next)
-# print(terminally)
-
-line = s.find('tr', class_="q-tr")
-# print(line)
-# while line != 'None':
-
-# can you find_next() to loop through the trades, kind of lmao, cuz some of them are named super poorly
+    
 
 
 
-# s = soup.find('main', class_="site-main")
-# tickers = s.find_all('span', class_="q-field issuer-ticker")
-# types = s.find_all('span', class_="q-field tx-type tx-type--buy has-asterisk")
-
-
-# for ticker in tickers: 
-#     print(ticker.text)
-
-# for type in types: 
-#     print(type.text)
+for i in txList:
+    print(" ")
+    print(i.getTicker() + " " + i.getType()+ " " + i.getDays())
+    print(" ")
 
