@@ -20,11 +20,10 @@ def main():
     s1 = Scrape()
     output = s1.getTrades()
 
-    # print(output)
+    
 
     for i in output:
         print(" ")
-        
         print(output.get(i).getTicker() + " " + output.get(i).getType()+ " " + output.get(i).getDays())
         print(" ")
 

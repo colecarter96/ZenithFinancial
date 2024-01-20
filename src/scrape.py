@@ -47,7 +47,7 @@ class Scrape:
             t1 = Trade(str(ticType.get_text().split(':')[0]), tipo, txDays.get_text())
             # print(t1.getDays() + "this printing")
             # print(t1)
-
+            
             txList[txDayDate.get_text() + daysFiled.get_text() + ticType.get_text().split(':')[0], tipo, txDays.get_text()] = t1
 
             # print(self.trade)

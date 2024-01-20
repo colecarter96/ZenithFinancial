@@ -5,6 +5,7 @@ class Trade:
         self.ticker = ticker
         self.tipo = tipo
         self.days = days
+        
 
     def getTicker(self):
          return self.ticker
