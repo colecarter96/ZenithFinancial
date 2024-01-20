@@ -16,11 +16,9 @@ def main():
 
     alpaca = AlpacaTrading()
 
-
     s1 = Scrape()
     output = s1.getTrades()
 
-    
 
     for i in output:
         print(" ")
