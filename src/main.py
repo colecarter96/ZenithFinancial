@@ -1,5 +1,6 @@
 from scrape import Scrape
 from trade import Trade
+from alpacaTrading import AlpacaTrading
 
 import requests 
 from bs4 import BeautifulSoup 
@@ -12,41 +13,25 @@ from alpaca.trading.enums import OrderSide, TimeInForce
 
 
 def main():
-    
-    # Making a GET request 
-    r = requests.get('https://www.capitoltrades.com/trades') 
 
-    #resulting hashmap
-    resultMap = {}
-    
-    # print request object 
-    print(r.url) 
-        
-    # print status code 
-    print(r.status_code)
+    alpaca = AlpacaTrading()
 
-    # Parsing the HTML 
-    soup = BeautifulSoup(r.content, 'html.parser') 
 
-    s = soup.find('main', class_="site-main")
-    s1 = s.find('div', class_='container')
-    yep = s1.find('tbody')
-    trade = yep.find('tr', class_='q-tr')
-
-    # while trade != None: #this works just testing something
-        
-    #     trade = trade.find_next('tr', class_='q-tr')
-    
-    
-
-    s1 = Scrape(trade)
+    s1 = Scrape()
     output = s1.getTrades()
-    # print(ou /tput.__len__())
+
+    # print(output)
 
     for i in output:
         print(" ")
-        print(i.getTicker() + " " + i.getType()+ " " + i.getDays())
+        
+        print(output.get(i).getTicker() + " " + output.get(i).getType()+ " " + output.get(i).getDays())
         print(" ")
+
+    # marketOrderData = alpaca.prepMarketOrderBuy(output[0].getTicker(), 1)
+    # print(marketOrderData)
+    # marketOrderBuy = alpaca.makeMarketOrder(marketOrderData)
+    # print(marketOrderBuy)
 
 
 if __name__=='__main__':
