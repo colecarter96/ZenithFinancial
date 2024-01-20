@@ -10,6 +10,8 @@ class AlpacaTrading:
         self.apiSecret = "dWiMdoQXTl3MFP1CnBO3AsVOUJOipcGjy4TDYxqn"
         self.tradingClient = TradingClient(self.apiKey, self.apiSecret)
         self.account = self.tradingClient.get_account()
+
+        self.mODList = []
         print('${} is available as buying power.'.format(self.account.buying_power))
 
     # # Check if our account is restricted from trading.
@@ -60,6 +62,30 @@ class AlpacaTrading:
                 order_data=mOD
                )
         return marketOrder
+    
+
+    # Prepares all market Orders given dict made by GetTrades()
+    def prepMarketOrders(self, dict):
+        self.mODList = []
+        tempTrade = None
+        for i in dict:
+            tempTrade = dict.get(i)
+            if tempTrade.getType() == 'Buy':
+                marketOrderData = self.prepMarketOrderBuy(tempTrade.getTicker(), 1)
+                self.mODList.append(marketOrderData)
+            elif tempTrade.getType() == 'Sell':
+                marketOrderData = self.prepMarketOrderSell(tempTrade.getTicker(), 1)
+                self.mODList.append(marketOrderData)
+
+        return self.mODList
+    
+    # Executes market Orders given market order data
+    def executeMarketOrders(self, mOD):
+        for i in mOD:
+            self.makeMarketOrder(i)
+        print("Successfully bought new data")
+
+    
 
 # API_KEY = "PK982XMHD9WKP2SAODOQ"
 # SECRET_KEY = "dWiMdoQXTl3MFP1CnBO3AsVOUJOipcGjy4TDYxqn"

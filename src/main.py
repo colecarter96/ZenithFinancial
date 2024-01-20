@@ -17,13 +17,19 @@ def main():
     alpaca = AlpacaTrading()
 
     s1 = Scrape()
-    output = s1.getTrades()
+    output = s1.initalGetTrades()
+    lol = s1.updateGetTrades()
+    print("start of initial")
+    print(lol)
 
+    marketOrderList = alpaca.prepMarketOrders(output)
+    print(marketOrderList)
 
-    for i in output:
-        print(" ")
-        print(output.get(i).getTicker() + " " + output.get(i).getType()+ " " + output.get(i).getDays())
-        print(" ")
+    alpaca.executeMarketOrders(marketOrderList)
+    # for i in output:
+    #     print(" ")
+    #     print(output.get(i).getTicker() + " " + output.get(i).getType()+ " " + output.get(i).getDays())
+    #     print(" ")
 
     # marketOrderData = alpaca.prepMarketOrderBuy(output[0].getTicker(), 1)
     # print(marketOrderData)
