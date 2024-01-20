@@ -14,6 +14,8 @@ class AlpacaTrading:
         self.mODList = []
         print('${} is available as buying power.'.format(self.account.buying_power))
 
+
+
     # # Check if our account is restricted from trading.
     def checkBlocked(self):
         if self.account.trading_blocked:
