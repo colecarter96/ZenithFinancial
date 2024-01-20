@@ -73,9 +73,9 @@ class AlpacaTrading:
             if tempTrade.getType() == 'Buy':
                 marketOrderData = self.prepMarketOrderBuy(tempTrade.getTicker(), 1)
                 self.mODList.append(marketOrderData)
-            elif tempTrade.getType() == 'Sell':
-                marketOrderData = self.prepMarketOrderSell(tempTrade.getTicker(), 1)
-                self.mODList.append(marketOrderData)
+            # elif tempTrade.getType() == 'Sell':
+            #     marketOrderData = self.prepMarketOrderSell(tempTrade.getTicker(), 1)
+            #     self.mODList.append(marketOrderData)
 
         return self.mODList
     

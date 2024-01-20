@@ -14,6 +14,8 @@ class Scrape:
         self.txList = {}
         self.possNewList = {}
         
+    def updateTxList(self, list):
+        self.txList |= list
 
     def initalGetTrades(self):
         self.txList = {}
