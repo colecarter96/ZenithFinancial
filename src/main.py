@@ -42,15 +42,7 @@ def main():
         time.sleep(43200)
 
     
-    # for i in output:
-    #     print(" ")
-    #     print(output.get(i).getTicker() + " " + output.get(i).getType()+ " " + output.get(i).getDays())
-    #     print(" ")
 
-    # marketOrderData = alpaca.prepMarketOrderBuy(output[0].getTicker(), 1)
-    # print(marketOrderData)
-    # marketOrderBuy = alpaca.makeMarketOrder(marketOrderData)
-    # print(marketOrderBuy)
 
 
 if __name__=='__main__':
