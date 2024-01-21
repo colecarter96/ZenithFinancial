@@ -26,7 +26,8 @@ def main():
     
     # print("start of initial")
     # print(lol)
-
+    
+    # make sure to get new link
     while True:
         newOutput = s1.updateGetTrades()
         newMarketOrderList = alpaca.prepMarketOrders(newOutput)
