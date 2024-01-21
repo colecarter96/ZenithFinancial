@@ -17,6 +17,14 @@ class Scrape:
     def updateTxList(self, list):
         self.txList |= list
 
+    def updateConnection (self):
+        self.r = requests.get('https://www.capitoltrades.com/trades') 
+        self.soup = BeautifulSoup(self.r.content, 'html.parser') 
+        self.site = self.soup.find('main', class_="site-main")
+        self.cont = self.site.find('div', class_='container')
+        self.body = self.cont.find('tbody')
+        
+
     def initalGetTrades(self):
         self.txList = {}
         # print(self.trade)
@@ -63,6 +71,7 @@ class Scrape:
         return self.txList
     
     def updateGetTrades(self):
+        self.possNewList = {}
         self.trade = self.body.find('tr', class_='q-tr')
         while self.trade != None:
 
@@ -99,6 +108,7 @@ class Scrape:
             
             if self.txList.get(key) == None:
                 self.possNewList[key] = t1
+                print("found new trade")
             
 
             # print(self.trade)

@@ -29,11 +29,15 @@ def main():
     
     # make sure to get new link
     while True:
-        newOutput = s1.updateGetTrades()
-        newMarketOrderList = alpaca.prepMarketOrders(newOutput)
-        alpaca.executeMarketOrders(newMarketOrderList)
+        # update scrape
+        s1.updateConnection()
 
-        s1.updateTxList(newOutput)
+        newOutput = s1.updateGetTrades()
+        if(newOutput != None):
+            newMarketOrderList = alpaca.prepMarketOrders(newOutput)
+            alpaca.executeMarketOrders(newMarketOrderList)
+
+            s1.updateTxList(newOutput)
 
         time.sleep(43200)
 
