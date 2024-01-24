@@ -32,14 +32,24 @@ class Scrape:
 
             ticType = self.trade.find('span', class_='q-field issuer-ticker')
             
+            if(ticType.getText() == "N/A"):
+                self.trade = self.trade.find_next('tr', class_='q-tr')
+                continue
 
             txType = self.trade.find('td', class_='q-td q-column--txType').find('div', class_='q-cell cell--tx-type')
             
-            if txType.find('span', class_="q-field tx-type tx-type--buy") != None:
-                tipo = 'Buy'
-            elif txType.find('span', class_="q-field tx-type tx-type--sell") != None:
-                tipo = 'Sell'
+            print(txType)
 
+            if txType.getText().__contains__('buy'):
+                tipo = 'Buy'
+            elif txType.getText().__contains__('sell'):
+                tipo = 'Sell'
+            # if txType.find('span', class_="q-field tx-type tx-type--buy") != None:
+            #     tipo = 'Buy'
+            # elif txType.find('span', class_="q-field tx-type tx-type--sell") != None:
+            #     tipo = 'Sell'
+                
+            print(tipo + "this is the type")
             
             txDays = self.trade.find('span', class_='reporting-gap-tier--2')
 
