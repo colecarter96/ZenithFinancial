@@ -12,6 +12,7 @@ class Scrape:
         self.body = self.cont.find('tbody')
         self.trade = self.body.find('tr', class_='q-tr')
         self.txList = {}
+        
         self.possNewList = {}
         
     def updateTxList(self, list):
@@ -38,7 +39,7 @@ class Scrape:
 
             txType = self.trade.find('td', class_='q-td q-column--txType').find('div', class_='q-cell cell--tx-type')
             
-            print(txType)
+
 
             if txType.getText().__contains__('buy'):
                 tipo = 'Buy'
@@ -87,6 +88,9 @@ class Scrape:
 
             ticType = self.trade.find('span', class_='q-field issuer-ticker')
             
+            if(ticType.getText() == "N/A"):
+                self.trade = self.trade.find_next('tr', class_='q-tr')
+                continue
 
             txType = self.trade.find('td', class_='q-td q-column--txType').find('div', class_='q-cell cell--tx-type')
             
