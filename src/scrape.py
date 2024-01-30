@@ -2,6 +2,7 @@
 import requests 
 from bs4 import BeautifulSoup 
 from trade import Trade
+import json
 
 class Scrape:
     def __init__(self):
@@ -14,6 +15,8 @@ class Scrape:
         self.txList = {}
         
         self.possNewList = {}
+
+        
         
     def updateTxList(self, list):
         self.txList |= list
