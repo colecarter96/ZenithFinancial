@@ -23,23 +23,29 @@ def main():
     marketOrderList = alpaca.prepMarketOrders(output)
     print(marketOrderList)
     alpaca.executeMarketOrders(marketOrderList)
-    
+    s1.updateTxList(output)
+
+    print(s1.politicians)
+
     # print("start of initial")
     # print(lol)
     
     # make sure to get new link
-    while True:
-        # update scrape
-        s1.updateConnection()
 
-        newOutput = s1.updateGetTrades()
-        if(newOutput != None):
-            newMarketOrderList = alpaca.prepMarketOrders(newOutput)
-            alpaca.executeMarketOrders(newMarketOrderList)
+    # comment for testing on Cole Branch
 
-            s1.updateTxList(newOutput)
+    # while True:
+    #     # update scrape
+    #     s1.updateConnection()
 
-        time.sleep(43200)
+    #     newOutput = s1.updateGetTrades()
+    #     if(newOutput != None):
+    #         newMarketOrderList = alpaca.prepMarketOrders(newOutput)
+    #         alpaca.executeMarketOrders(newMarketOrderList)
+
+    #         s1.updateTxList(newOutput)
+
+    #     time.sleep(43200)
 
     
 
