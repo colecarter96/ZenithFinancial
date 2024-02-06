@@ -56,7 +56,7 @@ class Scrape:
             return 0;
 
     def updateConnection (self):
-        self.r = requests.get('https://www.capitoltrades.com/trades') 
+        self.r = requests.get('https://www.capitoltrades.com/trades?per_page=96') 
         self.soup = BeautifulSoup(self.r.content, 'html.parser') 
         self.site = self.soup.find('main', class_="site-main")
         self.cont = self.site.find('div', class_='container')
@@ -157,15 +157,17 @@ class Scrape:
     def initalGetTrades(self):
         self.key = ""
         self.txList = {}
+        counter = 0
         # print(self.trade)
         while self.trade != None:
-
+            print(str(counter) + ", This is the current count.")
             tup = self.getNecessaryValues(self.trade)
 
             invalidTrade = tup[0]
 
             if invalidTrade:
                 self.trade = self.trade.find_next('tr', class_='q-tr')
+                # self.trade = self.body.find_next('tr', class_='q-tr')
                 continue
 
             t1 = tup[1]
@@ -176,16 +178,21 @@ class Scrape:
             
             # key = politician.get_text() + str(ticker.get_text().split(':')[0]) + txDayDate.get_text() + txDays.get_text() + buyOrSell
 
-            print(key)
+            
 
             # if self.politicians[t1.getPolitician()][t1.getTicker()] == None:
             #     self.politicians[t1.getPolitician()][t1.getTicker()] = t1
             # elif self.politicians[t1.getPolitician()][t1.getTicker()] != None:
             #     self.politicians[t1.getPolitician()][t1.getTicker()] = t1
             self.trade = self.trade.find_next('tr', class_='q-tr')
+            # self.trade = self.body.find_next('tr', class_='q-tr')
+
+            # print(self.trade)
+            # print("             ")
 
             # if t1.getTradeType() == 'Buy':
             self.txList[key] = t1
+            counter += 1
             
         
             # print("yeah")
@@ -209,6 +216,8 @@ class Scrape:
             invalidTrade = tup[0]
 
             if invalidTrade:
+                self.trade = self.trade.find_next('tr', class_='q-tr')
+                # self.trade = self.body.find_next('tr', class_='q-tr')
                 continue
 
             t1 = tup[1]
@@ -253,6 +262,7 @@ class Scrape:
             counter += 1
             
             self.trade = self.trade.find_next('tr', class_='q-tr')
+            # self.trade = self.body.find_next('tr', class_='q-tr')
             # print("yeah")
             # print(self.trade)
             # print("yeah")
