@@ -23,7 +23,7 @@ def main():
     output = s1.initalGetTrades()
     marketOrderList = alpaca.prepMarketOrders(output)
     print(marketOrderList)
-    # alpaca.executeMarketOrders(marketOrderList)
+    alpaca.executeMarketOrders(marketOrderList)
     s1.updateTxList(output)
 
     print(s1.politicians)
