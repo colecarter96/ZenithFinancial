@@ -72,12 +72,12 @@ class AlpacaTrading:
         tempTrade = None
         for i in dict:
             tempTrade = dict.get(i)
-            if tempTrade.getType() == 'Buy':
-                marketOrderData = self.prepMarketOrderBuy(tempTrade.getTicker(), 1)
+            if tempTrade.getTradeType() == 'Buy':
+                marketOrderData = self.prepMarketOrderBuy(tempTrade.getTicker(), tempTrade.getQuantity())
                 self.mODList.append(marketOrderData)
-            # elif tempTrade.getType() == 'Sell':
-            #     marketOrderData = self.prepMarketOrderSell(tempTrade.getTicker(), 1)
-            #     self.mODList.append(marketOrderData)
+            elif tempTrade.getTradeType() == 'Sell':
+                marketOrderData = self.prepMarketOrderSell(tempTrade.getTicker(), tempTrade.getQuantity())
+                self.mODList.append(marketOrderData)
 
         return self.mODList
     

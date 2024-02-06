@@ -1,15 +1,29 @@
 
 
 class Trade:
-    def __init__(self, ticker, tipo, days):
+    def __init__(self, poli,  ticker, datePlaced, daysFiled, tipo, quant):
+        self.datePlaced = datePlaced
         self.ticker = ticker
         self.tipo = tipo
-        self.days = days
+        self.daysFiled = daysFiled
+        self.politician = poli
+        self.quantity = quant
         
 
     def getTicker(self):
          return self.ticker
-    def getType(self):
+    
+    def getTradeType(self):
         return self.tipo
-    def getDays(self):
-        return self.days
+    
+    def getDaysSinceFiled(self):
+        return self.daysFiled
+    
+    def getDayPlaced(self):
+        return self.datePlaced
+    
+    def getPolitician(self):
+        return self.politician
+    
+    def getQuantity(self):
+        return self.quantity
