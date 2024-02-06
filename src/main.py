@@ -46,7 +46,7 @@ def main():
 
             s1.updateTxList(newOutput)
 
-        time.sleep(43200)
+        time.sleep(3600)
 
     
 
